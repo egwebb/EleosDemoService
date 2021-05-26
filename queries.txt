@@ -1,0 +1,10 @@
+db.loads.update({ load_status: 'EMPTY' },
+    {
+        display_identifier: 'loaddsid',
+        sort: 1,
+        load_status: 'OUT',
+        load_status_label: 'EMPTY',
+        active: true,
+        current: true
+    }
+)
