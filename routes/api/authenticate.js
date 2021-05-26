@@ -7,7 +7,7 @@ const User = require('../../models/User');
 router.get('/:token', (req, res) => {
     jwtDecode = jwt.decode(req.params.token);
     //jwtName = jwtDecode.full_name;
-    User.findOne({ full_name: jwtDecode.full_name })
+    User.findOne({ full_name: jwtDecode.name })
         .then((user) => {
             user.api_token = jwt.sign({ "username": user.username, "full_name": user.full_name }, 'secret');
             res.json(user);
