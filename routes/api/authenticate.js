@@ -12,7 +12,10 @@ router.get('/:token', (req, res) => {
         .then((user) => {
             user.api_token = jwt_encode({ "username": user.username, "full_name": user.full_name }, 'secret');
             res.json(user);
-        }).catch(res.status(401));
+        }).catch((err) => {
+            console.log(err);
+            res.status(401);
+        });
 })
 
 module.exports = router;
