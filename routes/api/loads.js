@@ -1,14 +1,31 @@
 const express = require('express');
+const jwt_decode = require('jwt-decode');
+const jwt_encode = require('jwt-encode');
 const router = express.Router();
 
 //Loads Model
 const Load = require('../../models/Loads');
+const User = require('../../models/User');
+
+var AuthLoad = function(token){
+    return new Promise(function(resolve, reject){
+        User.findOne({username: jwt_decode["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]})
+            .then(resolve("Authorized"))
+            .catch(reject("Unauthorized"));
+
+    });
+}
 
 // @route GET api/loads
 // @desc Gets all loads
 router.get('/', (req, res) => {
-    Load.find()
-        .then(loads => res.json(loads))
+    AuthLoad(req.head.Authorization)
+        .then(
+            Load.find()
+            .then(loads => res.json(loads))
+        ).catch((err) => {
+            res.status(401);
+        });
 });
 
 //@route POST api/loads
