@@ -33,3 +33,5 @@ const MessageSchema = new Schema (
         versionKey: false,
     },
 })
+
+module.exports = Message = mongoose.model('messages', MessageSchema);
