@@ -19,7 +19,7 @@ var AuthLoad = function(token){
 // @route GET api/loads
 // @desc Gets all loads
 router.get('/', (req, res) => {
-    AuthLoad(req.head.token)
+    AuthLoad(req.header.token)
         .then(
             Load.find()
             .then(loads => res.json(loads))
